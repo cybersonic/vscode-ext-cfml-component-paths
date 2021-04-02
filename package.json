@@ -4,6 +4,10 @@
 	"description": "Adds autocomplete features for CFML components",
 	"version": "1.0.0",
 	"publisher": "DomenicC",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/domenic-corso/vscode-ext-cfml-component-paths"
+	},
 	"engines": {
 		"vscode": "^1.55.0"
 	},
