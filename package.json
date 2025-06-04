@@ -1,67 +1,93 @@
 {
-	"name": "cfml-component-paths",
-	"displayName": "CFML Component Paths",
-	"description": "Adds autocomplete features for CFML components",
-	"version": "1.0.0",
-	"publisher": "DomenicC",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/domenic-corso/vscode-ext-cfml-component-paths"
-	},
-	"engines": {
-		"vscode": "^1.55.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:cfml-component-paths.copyPath",
-		"*"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "cfml-component-paths.copyPath",
-				"title": "Copy Component Path"
-			}
-		],
-		"menus": {
-			"editor/title/context": [
-				{
-					"command": "cfml-component-paths.copyPath",
-					"group": "1_cutcopypaste",
-					"when": "resourceExtname == .cfc"
-				}
-			],
-			"explorer/context": [
-				{
-					"command": "cfml-component-paths.copyPath",
-					"group": "6_copypath",
-					"when": "resourceExtname == .cfc"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.55.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
-		"@types/node": "^12.11.7",
-		"eslint": "^7.19.0",
-		"@typescript-eslint/eslint-plugin": "^4.14.1",
-		"@typescript-eslint/parser": "^4.14.1",
-		"glob": "^7.1.6",
-		"mocha": "^8.2.1",
-		"typescript": "^4.1.3",
-		"vscode-test": "^1.5.0"
-	}
+  "name": "cfml-component-paths",
+  "displayName": "CFML Component Paths",
+  "description": "Adds autocomplete features for CFML components",
+  "version": "1.0.0",
+  "publisher": "DomenicC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domenic-corso/vscode-ext-cfml-component-paths"
+  },
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:cfml-component-paths.copyPath",
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "cfml-component-paths.pathMappings": {
+          "type": "array",
+          "default": [],
+          "description": "Define custom path mappings. Each mapping is an object with a 'source' (the original path) and a 'target' (the new alias). For example, mapping 'unit_tests/tests/specs' to 'tests/specs'. The mappings are relative to the root path of the workspace and enables the package name to be resolved correctly.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "The original path to map from."
+              },
+              "target": {
+                "type": "string",
+                "description": "The new alias to map to."
+              }
+            }
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cfml-component-paths.copyPath",
+        "title": "Copy Component Path"
+      }
+    ],
+    "menus": {
+      "editor/title/context": [
+        {
+          "command": "cfml-component-paths.copyPath",
+          "group": "1_cutcopypaste",
+          "when": "resourceExtname == .cfc"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "cfml-component-paths.copyPath",
+          "group": "6_copypath",
+          "when": "resourceExtname == .cfc"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test --user-data-dir=/tmp/vscode-test"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/sinon": "^17.0.4",
+    "@types/vscode": "^1.55.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^11.5.0",
+    "sinon": "^20.0.0",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  }
 }
